@@ -1,16 +1,18 @@
 # Koolituste kataloog – Tehnikakeskus
 
-> Outline: headings are in Estonian, notes are in English. Write the Estonian text yourself in your own words.
+Reacti rakendus, mis kuvab ettevõtte Tehnikakeskus koolituste kataloogi. Tegemist on staatilise kasutajaliidesega: koolitused ja nende andmed on kirjutatud koodi sisse ning serverist andmeid ei laadita.
 
 ## 1. Kolme struktuuri võrdlus (8.1)
 
-The same UI in all three: header with nav, heading, category pills, course grid, card, footer.
+Kõigi kolme lahenduse puhul on kasutajaliides sama: päis koos navigatsiooniga, lehe pealkiri ja sissejuhatus, koolituste kategooriad, koolituste nimekiri (iga koolitus eraldi kaardina) ja jalus kontaktandmetega.
 
 ### A. Üks suur komponent
 
 ```
-App          (all JSX inline: header, nav links, pills, cards, footer)
+App
 ```
+
+Kogu kasutajaliides asub ühes komponendis. Päis, navigatsioonilingid, kategooriad, koolituste kaardid ja jalus on kõik kirjutatud otse `App` komponendi JSX-i sisse.
 
 ### B. Väga palju väikeseid komponente
 
@@ -41,7 +43,9 @@ App
     └── ContactInfo
 ```
 
-### C. Vastutuse järgi (valitud)
+Iga väike element või elementide rühm on eraldi komponent, näiteks kaardi pealkiri ja hind.
+
+### C. Vastutuse järgi jaotatud komponendid (valitud lahendus)
 
 ```
 App
@@ -55,55 +59,81 @@ App
 └── Footer
 ```
 
-Note: `main` is a plain semantic tag in `App`, not a component. Mention this, because the teacher's example has a `Main` component.
+Kasutajaliidese terviklikud osad on eraldi komponendid. Märkus: `main` on `App` komponendis tavaline semantiline HTML-element, mitte eraldi komponent.
 
 ### Võrdlus
 
-| Küsimus | A | B | C |
-|---|---|---|---|
-| Easiest to understand | Easy at first, one file, but gets long | Hardest to trace, too many files for tiny things | Component names match what you see on the page |
-| Change only course display | Dig through a large file, risk touching other parts | Edit several tiny components | One file (`CourseCard` + its CSS) |
-| Most repeated code | Card markup, nav links and pills written out inline | Little duplication, but lots of boilerplate (imports, prop passing) | Little, one card rendered via `map` |
-| Reusable elsewhere | Nothing | Many pieces, but mostly trivial (`Title`, `Intro`), small gain | `CourseCard`, `CourseList`, `Navigation`, `Header`, `Footer` |
+**Millist lahendust on kõige lihtsam mõista?**
 
-### Probleemid liiga paljude väikeste komponentidega
+- A on alguses lihtne, sest kõik on ühes failis, kuid fail muutub kiiresti pikaks ja segaseks.
+- B on kõige raskemini jälgitav, sest ühe kaardi koodi leidmiseks tuleb avada palju väikeseid faile.
+- C on kõige arusaadavam, sest komponentide nimed vastavad sellele, mida lehel näha on.
 
-Your own words. Points to cover:
+**Kui lihtne on muuta ainult koolituste kuvamise osa?**
 
-- Props get passed down through several layers.
-- You have to open many files to see one card.
-- Naming overhead; a new reader can't find things.
-- Indirection without any reuse payoff.
+- A-s tuleb koolituste osa leida suurest failist ning muutmisel on oht puudutada ka teisi osi.
+- B-s tuleb muuta mitut väikest komponenti eri failides, näiteks pealkirja, hinda ja kirjeldust.
+- C-s piisab ühest komponendist `CourseCard` ja selle CSS-failist. Paigutuse muutmiseks tuleb muuta `CourseList` komponenti.
 
-### Valik
+**Millises lahenduses tekib kõige tõenäolisemalt korduv kood?**
 
-C. Write 2–3 reasons of your own. Ideas: each component maps to a visible block; `CourseCard` is the one real repeating unit; course display can be changed in one place.
+- A-s: iga koolituse kaart, navigatsiooniliinkide ja kategooriate kood kirjutatakse korduvalt välja.
+- B-s on korduvat sisu vähe, kuid iga väikese komponendi juures korduvad importimine, propside edastamine ja faili ülesehitus.
+- C-s on kordusi vähe, sest üks `CourseCard` kuvatakse kõigi koolituste jaoks.
+
+**Milliseid komponente saaks kasutada ka rakenduse teistes osades?**
+
+- A-s mitte ühtegi.
+- B-s on palju väikeseid osi, kuid enamik neist (näiteks `Title` või `Intro`) on liiga lihtsad, et taaskasutus oleks kasulik.
+- C-s `CourseCard` ja `CourseList` (näiteks populaarsete koolituste jaotises), `Navigation`, `Header` ja `Footer`.
+
+**Mis probleemid võivad tekkida liiga paljude väikeste komponentide kasutamisel?**
+
+- Propsid tuleb edastada läbi mitme taseme.
+- Ühe kaardi nägemiseks tuleb avada palju faile.
+- Nimede välja mõtlemine ja failide haldamine võtab palju aega.
+- Uuel lugejal on raske leida, kus mingi osa asub.
+- Komponendid lisavad vahekihte, kuid taaskasutust ei tule juurde.
+
+**Millise lahenduse valiksin edasiseks arendamiseks ja miks?**
+
+Valin lahenduse C. Iga komponent vastab ühele nähtavale osale lehel ja sellel on üks selge ülesanne. `CourseCard` on ainus tõeliselt korduv osa ning seda saab kasutada mitmes kohas. Koolituste kuvamist saab muuta ühes kohas, ilma et peaks teisi osi puutuma.
 
 ## 2. Komponentide hierarhia (8.2)
 
-Reuse the tree from C, then:
+```
+App
+├── Header
+│   └── Navigation
+├── main
+│   ├── PageHeading
+│   ├── CategoryList
+│   └── CourseList
+│       └── CourseCard
+└── Footer
+```
 
 | Komponent | Ülesanne | Sisaldab | Propsid |
 |---|---|---|---|
-| `App` | Composes the page, imports the data | all below | none |
-| `Header` | Brand name and tagline, holds the nav | `Navigation` | `companyName`, `tagline` |
-| `Navigation` | In-page links | none | `ariaLabel` |
-| `PageHeading` | The h1 and the intro | none | `title`, `intro` |
-| `CategoryList` | Category pills | none | `categories`, `courses` (counts – decide if kept) |
-| `CourseList` | Section heading and the card grid | `CourseCard` | `courses` |
-| `CourseCard` | One course | none | `title`, `description`, `duration`, `price`, `category`, `instructor`, `popular` |
-| `Footer` | Copyright and contact details | none | `companyName`, `email`, `phone` |
+| `App` | Koondab lehe ja impordib andmed | kõiki allpool olevaid | puuduvad |
+| `Header` | Kuvab ettevõtte nime ja kirjelduse, sisaldab navigatsiooni | `Navigation` | `companyName`, `tagline` |
+| `Navigation` | Lehesisesed lingid | ei sisalda | `ariaLabel` |
+| `PageHeading` | Lehe pealkiri ja lühike sissejuhatus | ei sisalda | `title`, `intro` |
+| `CategoryList` | Koolituste kategooriad | ei sisalda | `categories`, `courses` |
+| `CourseList` | Jaotise pealkiri ja koolituste kaardid | `CourseCard` | `courses` |
+| `CourseCard` | Ühe koolituse info | ei sisalda | `title`, `description`, `duration`, `price`, `category`, `instructor`, `popular` |
+| `Footer` | Autoriõigus ja kontaktandmed | ei sisalda | `companyName`, `email`, `phone` |
 
-Data flow: `data/courses.js` → `App` → `CourseList` → `CourseCard`.
+Andmete liikumine: `data/courses.js` → `App` → `CourseList` → `CourseCard`.
 
 ### Põhjendus
 
-- Each component is one visible block with one job.
-- `CourseCard` repeats 6 times, so it is the reusable unit.
-- `CourseList` and `CourseCard` are separate: layout and iteration vs rendering one item.
-- Data lives outside the UI, so content changes don't touch components.
-- Title and price are not split out: never used outside the card.
-- CSS: global variables and base styles in `index.css`, everything else scoped per component.
+- Iga komponent vastab ühele nähtavale osale lehel ja tal on üks ülesanne.
+- `CourseCard` kuvatakse kuus korda, seetõttu on see korduvkasutatav komponent.
+- `CourseList` ja `CourseCard` on eraldi, sest nimekirja paigutus ja läbikäimine on teine ülesanne kui ühe koolituse kuvamine.
+- Andmed asuvad kasutajaliidesest eraldi failis, et sisu muutmisel ei peaks komponente puutuma.
+- Pealkirja ja hinda ei ole eraldi komponentideks tehtud, sest neid ei kasutata kuskil mujal kui kaardil.
+- CSS: üldised muutujad ja põhikujundus on failis `index.css`, kõik muu on komponendi enda CSS-failis.
 
 ## 3. Projekti käivitamine
 
@@ -112,18 +142,31 @@ npm install
 npm run dev
 ```
 
+Ava terminalis kuvatud aadress brauseris.
+
 ## 4. Komponentide vastutus
 
-Fill in from the table above, one or two sentences per component, in your own words.
+- **App** – koondab kogu lehe ning annab andmed edasi alamkomponentidele.
+- **Header** – kuvab ettevõtte nime ja kirjelduse ning sisaldab navigatsiooni.
+- **Navigation** – kuvab lehesisesed lingid (koolitused, kategooriad, kontakt).
+- **PageHeading** – kuvab lehe pealkirja ja sissejuhatuse.
+- **CategoryList** – kuvab koolituste kategooriad.
+- **CourseList** – kuvab koolituste nimekirja ja loob iga koolituse jaoks ühe `CourseCard` komponendi.
+- **CourseCard** – kuvab ühe koolituse andmed.
+- **Footer** – kuvab autoriõiguse ja kontaktandmed.
 
 ## 5. Propsid
 
-Explain: where props come from (`CourseList` passes them from the `courses` array), how `CourseCard` uses them, and the destructured-vs-`props` difference (same UI, only syntax differs).
+Koolituste andmed asuvad failis `src/data/courses.js`. `App` impordib need ja annab koolituste massiivi propsina edasi komponendile `CourseList`. `CourseList` käib massiivi läbi meetodiga `map` ja loob iga koolituse jaoks ühe `CourseCard` komponendi, andes sellele propsidena edasi koolituse nime, kirjelduse, kestuse, hinna, kategooria, koolitaja ja populaarsuse.
 
-## 6. Populaarsed koolitused (8.4)
+`CourseCard` võtab propsid vastu funktsiooni parameetris `{ title, description, duration, price, category, instructor, popular }` ja kasutab neid oma JSX-is. Seetõttu on kõik kaardid sama kujundusega, kuid sisu on igaühel erinev.
 
-To fill in after 8.4.
+Kahe koodinäite erinevus (`CourseCard(props)` ja `CourseCard({ title, ... })`): kasutajaliideses tulemus ei erine. Erinevus on ainult süntaksis. Esimeses kasutatakse väärtusi kujul `props.title`, teises on need juba parameetrites eraldatud ja neid kasutatakse kujul `title`.
+
+## 6. Populaarsete koolituste jaotis (8.4)
+
+Täidan pärast 8.4 tegemist.
 
 ## 7. Ekraanipildid
 
-To add after 8.4 (desktop and 375px).
+Lisan pärast 8.4 tegemist (arvuti ja 375 px laiune vaade).
