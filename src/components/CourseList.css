@@ -1,0 +1,14 @@
+.course-list {
+  margin-bottom: var(--space-5);
+}
+
+.course-list__title {
+  margin-bottom: var(--space-3);
+  font-size: 1.25rem;
+}
+
+.course-list__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--space-4);
+}
