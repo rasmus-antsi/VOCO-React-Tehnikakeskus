@@ -169,4 +169,8 @@ Täidan pärast 8.4 tegemist.
 
 ## 7. Ekraanipildid
 
-Lisan pärast 8.4 tegemist (arvuti ja 375 px laiune vaade).
+### Arvutivaade
+
+![Koolituste kataloogi arvutivaade](docs/screenshot-desktop.png)
+
+375 px laiuse vaate lisan pärast 8.4 tegemist.
