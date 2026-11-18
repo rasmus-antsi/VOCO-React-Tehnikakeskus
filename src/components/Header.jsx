@@ -9,7 +9,7 @@ function Header({ companyName, tagline }) {
           <span className="header__name">{companyName}</span>
           <span className="header__tagline">{tagline}</span>
         </a>
-        <Navigation label="Peamenüü" />
+        <Navigation ariaLabel="Peamenüü" />
       </div>
     </header>
   );

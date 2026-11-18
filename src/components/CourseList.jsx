@@ -10,7 +10,15 @@ function CourseList({ courses }) {
       <ul className="course-list__grid">
         {courses.map((course) => (
           <li key={course.id}>
-            <CourseCard course={course} />
+            <CourseCard
+              title={course.title}
+              description={course.description}
+              duration={course.duration}
+              price={course.price}
+              category={course.category}
+              instructor={course.instructor}
+              popular={course.popular}
+            />
           </li>
         ))}
       </ul>

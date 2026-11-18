@@ -1,8 +1,6 @@
 import './CourseCard.css';
 
-function CourseCard({ course }) {
-  const { title, description, duration, price, category, instructor, popular } = course;
-
+function CourseCard({ title, description, duration, price, category, instructor, popular }) {
   return (
     <article className="course-card">
       <div className="course-card__top">

@@ -6,14 +6,14 @@ const links = [
   { href: '#kontakt', label: 'Kontakt' },
 ];
 
-function Navigation({ label }) {
+function Navigation({ ariaLabel }) {
   return (
-    <nav className="navigation" aria-label={label}>
+    <nav className="navigation" aria-label={ariaLabel}>
       <ul className="navigation__list">
-        {links.map(({ href, label: linkLabel }) => (
+        {links.map(({ href, label }) => (
           <li key={href}>
             <a className="navigation__link" href={href}>
-              {linkLabel}
+              {label}
             </a>
           </li>
         ))}
