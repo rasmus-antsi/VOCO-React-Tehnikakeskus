@@ -172,5 +172,3 @@ Täidan pärast 8.4 tegemist.
 ### Arvutivaade
 
 ![Koolituste kataloogi arvutivaade](docs/screenshot-desktop.png)
-
-375 px laiuse vaate lisan pärast 8.4 tegemist.
