@@ -1,0 +1,19 @@
+.footer {
+  background: var(--color-text);
+  color: var(--color-bg);
+  font-size: 0.9rem;
+}
+
+.footer__inner {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding-block: var(--space-4);
+}
+
+.footer__contact {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
