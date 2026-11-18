@@ -12,7 +12,7 @@ function App() {
       <main className="container">
         <PageHeading
           title="Koolituste kataloog"
-          intro="Praktilised koolitused automaatika, elektritehnika ja mehaanika valdkonnas – kogenud koolitajatelt."
+          intro="Praktilised koolitused 3D-printimise, CAD-disaini ja elektroonika valdkonnas – kogenud koolitajatelt."
         />
         <CategoryList categories={categories} courses={courses} />
         <CourseList courses={courses} />
