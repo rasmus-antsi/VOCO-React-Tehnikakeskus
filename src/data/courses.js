@@ -1,3 +1,5 @@
+export const ALL_CATEGORIES = 'Kõik';
+
 export const categories = ['3D-printimine', 'CAD-disain', 'Elektroonika'];
 
 export const courses = [
