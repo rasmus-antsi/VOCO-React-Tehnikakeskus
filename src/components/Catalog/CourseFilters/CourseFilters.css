@@ -1,0 +1,29 @@
+.course-filters {
+  margin-bottom: var(--space-4);
+}
+
+.course-filters__search {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  max-width: 28rem;
+}
+
+.course-filters__label {
+  font-weight: 500;
+}
+
+.course-filters__input {
+  width: 100%;
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  background: var(--color-surface);
+  color: var(--color-text);
+  font: inherit;
+}
+
+.course-filters__input:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 1px;
+}
