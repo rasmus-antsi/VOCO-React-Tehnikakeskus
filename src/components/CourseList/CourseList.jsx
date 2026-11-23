@@ -1,4 +1,4 @@
-import CourseCard from './CourseCard.jsx';
+import CourseCard from './CourseCard/CourseCard.jsx';
 import './CourseList.css';
 
 function CourseList({ courses }) {

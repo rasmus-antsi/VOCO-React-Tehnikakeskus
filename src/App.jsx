@@ -1,8 +1,8 @@
-import Header from './components/Header.jsx';
-import PageHeading from './components/PageHeading.jsx';
-import CategoryList from './components/CategoryList.jsx';
-import CourseList from './components/CourseList.jsx';
-import Footer from './components/Footer.jsx';
+import Header from './components/Header/Header.jsx';
+import PageHeading from './components/PageHeading/PageHeading.jsx';
+import CategoryList from './components/CategoryList/CategoryList.jsx';
+import CourseList from './components/CourseList/CourseList.jsx';
+import Footer from './components/Footer/Footer.jsx';
 import { categories, courses } from './data/courses.js';
 
 function App() {

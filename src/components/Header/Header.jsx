@@ -1,4 +1,4 @@
-import Navigation from './Navigation.jsx';
+import Navigation from './Navigation/Navigation.jsx';
 import './Header.css';
 
 function Header({ companyName, tagline }) {
