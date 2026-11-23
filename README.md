@@ -4,6 +4,14 @@ Reacti rakendus, mis kuvab ettevõtte Tehnikakeskus koolituste kataloogi. Koolit
 
 ![Koolituste kataloogi arvutivaade](docs/images/screenshot-desktop.png)
 
+## Võimalused
+
+- Koolituste otsimine nime järgi.
+- Filtreerimine kategooria järgi, koos otsinguga.
+- Koolituste lemmikuks märkimine ja ainult lemmikute kuvamine.
+- Lemmikute arv rakenduse päises.
+- Lemmikud säilivad lehe uuesti laadimisel.
+
 ## Projekti käivitamine
 
 ```bash
@@ -17,4 +25,4 @@ Ava terminalis kuvatud aadress brauseris.
 
 - [Kolme struktuuri võrdlus (8.1)](docs/8.1-struktuuride-vordlus.md)
 - [Komponentide hierarhia (8.2)](docs/8.2-komponentide-hierarhia.md)
-- [Andmete edastamine Reactis](docs/andmete-edastamine.md) (töö on pooleli)
+- [Andmete edastamine Reactis](docs/andmete-edastamine.md)
