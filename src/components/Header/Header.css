@@ -28,3 +28,18 @@
   font-size: 0.875rem;
   opacity: 0.85;
 }
+
+.header__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2) var(--space-3);
+}
+
+.header__favorites {
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-pill);
+  background: var(--color-primary-dark);
+  font-weight: 500;
+  white-space: nowrap;
+}

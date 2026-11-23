@@ -1,7 +1,7 @@
 import CourseCard from './CourseCard/CourseCard.jsx';
 import './CourseList.css';
 
-function CourseList({ courses, emptyMessage, favorites, onToggleFavorite }) {
+function CourseList({ courses, emptyMessage }) {
   return (
     <section className="course-list" id="koolitused" aria-labelledby="koolitused-pealkiri">
       <h2 className="course-list__title" id="koolitused-pealkiri">
@@ -22,8 +22,6 @@ function CourseList({ courses, emptyMessage, favorites, onToggleFavorite }) {
                 category={course.category}
                 instructor={course.instructor}
                 popular={course.popular}
-                isFavorite={favorites.includes(course.id)}
-                onToggleFavorite={onToggleFavorite}
               />
             </li>
           ))}

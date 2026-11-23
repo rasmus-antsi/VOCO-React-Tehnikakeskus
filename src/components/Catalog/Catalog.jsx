@@ -1,22 +1,15 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import CategoryList from '../CategoryList/CategoryList.jsx';
 import CourseList from '../CourseList/CourseList.jsx';
 import CourseFilters from './CourseFilters/CourseFilters.jsx';
+import { FavoritesContext } from '../../context/FavoritesContext.js';
 import { ALL_CATEGORIES } from '../../data/courses.js';
 
 function Catalog({ categories, courses }) {
   const [search, setSearch] = useState('');
   const [selectedCategory, setSelectedCategory] = useState(ALL_CATEGORIES);
   const [showOnlyFavorites, setShowOnlyFavorites] = useState(false);
-  const [favorites, setFavorites] = useState([]);
-
-  function toggleFavorite(courseId) {
-    setFavorites((current) =>
-      current.includes(courseId)
-        ? current.filter((id) => id !== courseId)
-        : [...current, courseId],
-    );
-  }
+  const { favorites } = useContext(FavoritesContext);
 
   const searchText = search.trim().toLocaleLowerCase('et');
   const visibleCourses = courses.filter((course) => {
@@ -47,12 +40,7 @@ function Catalog({ categories, courses }) {
         selectedCategory={selectedCategory}
         onSelectCategory={setSelectedCategory}
       />
-      <CourseList
-        courses={visibleCourses}
-        emptyMessage={emptyMessage}
-        favorites={favorites}
-        onToggleFavorite={toggleFavorite}
-      />
+      <CourseList courses={visibleCourses} emptyMessage={emptyMessage} />
     </>
   );
 }

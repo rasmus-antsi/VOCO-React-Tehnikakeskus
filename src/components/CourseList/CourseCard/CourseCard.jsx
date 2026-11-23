@@ -1,17 +1,10 @@
+import { useContext } from 'react';
+import { FavoritesContext } from '../../../context/FavoritesContext.js';
 import './CourseCard.css';
 
-function CourseCard({
-  id,
-  title,
-  description,
-  duration,
-  price,
-  category,
-  instructor,
-  popular,
-  isFavorite,
-  onToggleFavorite,
-}) {
+function CourseCard({ id, title, description, duration, price, category, instructor, popular }) {
+  const { favorites, toggleFavorite } = useContext(FavoritesContext);
+  const isFavorite = favorites.includes(id);
   const favoriteLabel = isFavorite ? 'Eemalda lemmikutest' : 'Lisa lemmikuks';
 
   return (
@@ -38,7 +31,7 @@ function CourseCard({
           className={`course-card__favorite${isFavorite ? ' course-card__favorite--active' : ''}`}
           type="button"
           aria-label={`${favoriteLabel}: ${title}`}
-          onClick={() => onToggleFavorite(id)}
+          onClick={() => toggleFavorite(id)}
         >
           <span aria-hidden="true">{isFavorite ? '★' : '☆'}</span> {favoriteLabel}
         </button>
