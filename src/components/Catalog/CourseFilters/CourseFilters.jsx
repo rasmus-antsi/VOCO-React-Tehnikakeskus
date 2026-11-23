@@ -1,6 +1,6 @@
 import './CourseFilters.css';
 
-function CourseFilters({ search, onSearchChange }) {
+function CourseFilters({ search, onSearchChange, showOnlyFavorites, onShowOnlyFavoritesChange }) {
   return (
     <div className="course-filters">
       <label className="course-filters__search">
@@ -12,6 +12,14 @@ function CourseFilters({ search, onSearchChange }) {
           value={search}
           onChange={(event) => onSearchChange(event.target.value)}
         />
+      </label>
+      <label className="course-filters__favorites">
+        <input
+          type="checkbox"
+          checked={showOnlyFavorites}
+          onChange={(event) => onShowOnlyFavoritesChange(event.target.checked)}
+        />
+        Ainult lemmikud
       </label>
     </div>
   );

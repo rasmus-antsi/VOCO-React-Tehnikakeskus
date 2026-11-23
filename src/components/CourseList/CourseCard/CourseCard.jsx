@@ -1,6 +1,19 @@
 import './CourseCard.css';
 
-function CourseCard({ title, description, duration, price, category, instructor, popular }) {
+function CourseCard({
+  id,
+  title,
+  description,
+  duration,
+  price,
+  category,
+  instructor,
+  popular,
+  isFavorite,
+  onToggleFavorite,
+}) {
+  const favoriteLabel = isFavorite ? 'Eemalda lemmikutest' : 'Lisa lemmikuks';
+
   return (
     <article className="course-card">
       <div className="course-card__top">
@@ -19,7 +32,17 @@ function CourseCard({ title, description, duration, price, category, instructor,
           <dd>{instructor}</dd>
         </div>
       </dl>
-      <p className="course-card__price">{price} €</p>
+      <div className="course-card__footer">
+        <p className="course-card__price">{price} €</p>
+        <button
+          className={`course-card__favorite${isFavorite ? ' course-card__favorite--active' : ''}`}
+          type="button"
+          aria-label={`${favoriteLabel}: ${title}`}
+          onClick={() => onToggleFavorite(id)}
+        >
+          <span aria-hidden="true">{isFavorite ? '★' : '☆'}</span> {favoriteLabel}
+        </button>
+      </div>
     </article>
   );
 }

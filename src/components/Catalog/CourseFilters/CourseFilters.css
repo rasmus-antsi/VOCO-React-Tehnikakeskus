@@ -1,9 +1,14 @@
 .course-filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: var(--space-3) var(--space-4);
   margin-bottom: var(--space-4);
 }
 
 .course-filters__search {
   display: flex;
+  flex: 1 1 16rem;
   flex-direction: column;
   gap: var(--space-1);
   max-width: 28rem;
@@ -26,4 +31,20 @@
 .course-filters__input:focus-visible {
   outline: 2px solid var(--color-primary);
   outline-offset: 1px;
+}
+
+.course-filters__favorites {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding-block: var(--space-2);
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.course-filters__favorites input {
+  width: 1.1rem;
+  height: 1.1rem;
+  margin: 0;
+  accent-color: var(--color-primary);
 }
